@@ -1,0 +1,12 @@
+---
+title: "deneme_markdown1"
+author: "unaltugba"
+date: "07 10 2020"
+output: html_document
+---
+
+## Assignment1_deneme
+
+I am a Customer Experience and Analytics Specilaist
+
+

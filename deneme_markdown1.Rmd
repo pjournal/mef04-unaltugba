@@ -7,6 +7,6 @@ output: html_document
 
 ## Assignment1_deneme
 
-I am a Customer Experience and Analytics Specilaist
+I am a Customer Experience and Analytics Specialist
 
 

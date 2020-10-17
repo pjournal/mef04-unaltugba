@@ -1,2 +1,2 @@
 
-[Assingment 1](Assignment_1.html)
+[Assignment 1](Assignment_1.html)

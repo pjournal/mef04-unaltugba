@@ -46,9 +46,8 @@ based on these dictionaries for each word.
 
 ## 3- [Data Science Movie Recommendation System Project in R](https://data-flair.training/blogs/data-science-r-movie-recommendation/)
 
-
-A movie recommendation algorithm was developed using the recommenderlab library on a dataset with 105339 scoring for
-10329 films. 
+A movie recommendation algorithm was developed using the recommenderlab library on a dataset with 105339 
+scoring for 10329 films. 
 For 2 users watching the same movie genre, a future movie that a user will watch will be offered to another.
 The logic of the suggestion system works in this way.
 

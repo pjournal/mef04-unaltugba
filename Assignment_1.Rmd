@@ -1,0 +1,59 @@
+---
+title: "Assignment_1"
+author: "Tuğba Ünal"
+date: "18/10/2020"
+output: html_document
+---
+
+
+# About Me
+
+I graduated from Yildiz Technical University Statistics Department in 2018. I completed double major programme on
+Mathematics Engineering in 2019. 
+I am currently working at Hepsiburada as Customer Experience and Analytics Specialist.
+I generally do analysis with using SQL and Python, such as regression, churn prediction, satisfaction score prediction.
+I am interested in ML & DL Algortihms and Big Data areas, I want to improve myself in this field as much as possible.
+
+[My Linkedin Profile](https://www.linkedin.com/in/tuğba-ünal-58880313a)
+
+
+# useR! 2020: ML for Diversified Portfolio Construction by Explainable AI (D. Marinelli), regular
+
+This video compares two different risk methods, Equal Risk Contribution and Hierarchical Risk Parity, to find the
+optimal portfolio, and explains their findings with machine learning methods. 
+He uses the XGBoost method to compare metrics between two risk distribution methods. He also uses the SHAPforxgboost
+library to visualize its findings.
+
+[You can see here](https://www.youtube.com/watch?v=lrADaEAek9Y) 
+
+
+# Three R-posts relevant to my interests:
+
+
+## 1- Customer Segmentation Project in R
+
+This post tries to find the customer segmentation with using the K-Means Algorithm. It also uses the Elbow Method and
+Average Sillhouette Method to find optimal cluster number. 
+Finally, It decides 6 customer class is the most optimal class number. It got help from NbClust and factoextra
+libraries for visualizations.
+
+[You can read here](https://rpubs.com/Unsa/582266)
+
+
+## 2- Tutorial: Sentiment Analysis in R
+This post examines how the sentiment towards presidential speeches has changed over time by analyzing emotions for a
+regular US speech between 1989 and 2017.
+A dictionary of positive and negative words was created and it was determined that the word was negative or positive
+based on these dictionaries for each word.
+
+[You can read here](https://www.kaggle.com/rtatman/tutorial-sentiment-analysis-in-r)
+
+
+## 3- Data Science Movie Recommendation System Project in R
+
+A movie recommendation algorithm was developed using the recommenderlab library on a dataset with 105339 
+scoring for 10329 films. 
+For 2 users watching the same movie genre, a future movie that a user will watch will be offered to another.
+The logic of the suggestion system works in this way.
+
+[You can read here](https://data-flair.training/blogs/data-science-r-movie-recommendation/)

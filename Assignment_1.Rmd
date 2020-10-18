@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "Assignment_1"
 author: "Tuğba Ünal"

@@ -10,9 +10,10 @@ output: html_document
 
 I graduated from Yildiz Technical University Statistics Department in 2018. I completed double major programme on
 Mathematics Engineering in 2019. 
-I am currently working at Hepsiburada as Customer Experience and Analytics Specialist.
+I am currently working at Hepsiburada as a Customer Experience and Analytics Specialist.
 I generally do analysis with using SQL and Python, such as regression, churn prediction, satisfaction score prediction.
-I am interested in ML & DL Algortihms and Big Data areas, I want to improve myself in this field as much as possible.
+I am interested in ML & DL Algorithms and Big Data areas, I want to enhance my abilities in this field, specially
+Supervised & Unsupervised Learning algorithms in the real world problems.
 
 [My Linkedin Profile](https://www.linkedin.com/in/tuğba-ünal-58880313a)
 

@@ -2,4 +2,4 @@
 
 Week 1: [Assignment 1 - RMarkdown](Assignment_1.html)
 
-Week 3: [Istanbul Property Report](week3-bonusexercise.html)
+Week 3: [Istanbul Property Report](istanbulpropertyreport.html)

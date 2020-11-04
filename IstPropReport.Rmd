@@ -30,7 +30,7 @@ p<- ggplot(df, aes(Date, TotalSales, color=NewHousePriceIndex)) +
 ```
 
 
-```{r, echo=FALSE,fig.width=14, fig.height=7}
+```{r, echo=TRUE,fig.width=14, fig.height=7}
 p + theme(
   plot.title = element_text(color="darkred", size=15, face="bold"),
   plot.subtitle = element_text(color="darkred", size=12),

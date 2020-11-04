@@ -1,0 +1,52 @@
+---
+title: "IstanbulPropertyReport"
+author: "unaltugba"
+date: "04&11&2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(ggplot2)
+```
+
+```{r}
+library(readxl)
+library(ggplot2)
+```
+
+```{r df}
+
+df<- read_xlsx("/Users/unalt/Desktop/MEF/Data Analytics Essentials/week3/EVDS_istanbul_property_data.xlsx",skip=36,n_max=94,
+               col_names=c('Date','TotalSales','EncumberedSales','FirsthandSales',
+                           'SecondhandSales','ForeignSales','NewHousePriceIndex','HouseLevel','HouseUnitPrice'))
+
+
+p<- ggplot(df, aes(Date, TotalSales, color=NewHousePriceIndex)) + 
+      geom_point(aes(size=HouseUnitPrice)) +
+      ggtitle("Istanbul Property Trend","2012-2020 Istanbul Housing Sales&Price&Index Data") +
+      xlab("Date") + ylab("Total House Sales")
+```
+
+
+```{r, echo=FALSE,fig.width=14, fig.height=7}
+p + theme(
+  plot.title = element_text(color="darkred", size=15, face="bold"),
+  plot.subtitle = element_text(color="darkred", size=12),
+  axis.title.x = element_text(color="dimgrey", size=13, face="bold"),
+  axis.title.y = element_text(color="dimgrey", size=13, face="bold"),
+  axis.text.x = element_text(angle=90, size=9),
+  legend.text = element_text(size = 12),
+  legend.title = element_text(size=12)
+)
+
+```
+
+
+
+### When the real estate data of Istanbul between 2012-2020 were examined, the following findings were obtained:
+
+- It is seen that the Istanbul new housing price index has started to rise since July 2016.
+- Istanbul housing unit prices have been on the rise since March 2015.
+- Despite the increase in new housing price index and housing unit prices, house sales in Istanbul have been on an rising trend since September 2019.

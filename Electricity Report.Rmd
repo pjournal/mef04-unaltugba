@@ -76,7 +76,7 @@ hourly_smp + theme(
   plot.title = element_text(color="darkred", size=14, face="bold"))
 ```
 
-It is seen that the SMP values and the MCP values given in the previous graph move in parallel. Especially between 4 pm and 5 pm, it is seen that the energy requirement is approximately 4 times the normal energy requirement.
+It is seen that the SMP values and the MCP values given in the previous graph move in the same direction. Especially between 4 pm and 5 pm, it is seen that the energy requirement is approximately 4 times the normal energy requirement.
 
 
 ```{r, fig.width=10, fig.height=7}
@@ -87,7 +87,7 @@ cor + theme(
   plot.title = element_text(color="darkred", size=14, face="bold"))
 ```
 
-Looking at the day-based of SMP and MCP data, as expected, it was observed that the energy need at the weekend is lower than during the weekday. The highest energy requirement occurred on Thursday
+Looking at the day-based of SMP and MCP data, as expected, it was observed that the energy need at the weekend is lower than weekday. The highest energy requirement occurred on Thursday.
 
 
 ```{r}
@@ -106,5 +106,5 @@ diff_smp_mcp + theme(
 
 ```
 
-Looking at the general data for September, it is seen that the balance of production and consumption has never been achieved and the days of energy deficit are the majority
+Looking at the general data for September, it is seen that the balance of production and consumption has never been achieved and the days of energy deficit are the majority.
 

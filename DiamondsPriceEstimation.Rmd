@@ -1,0 +1,247 @@
+---
+title: "Diamonds Price Estimation"
+author: "Tugba Unal"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+    theme: united
+    highlight: tango
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# 1. Introduction
+
+## 1.1 Diamonds Data Set
+
+The diamond data set is a data set that shows the price of diamonds by classifying them according to certain numerical and categorical variables. You can find variables as below:
+
+- carat: weight of the diamond
+- cut: quality of the cut
+- color: diamond color
+- clarity: measurement of how clear the diamond is
+- depth: total depth percentage
+- table: width of top of diamond relative to widest point
+- price: price in US dollars
+- x: length in mm
+- y: width in mm
+- z: depth in mm
+
+
+## 1.2 Install Packages
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(corrplot)
+library(RColorBrewer)
+library(caret) 
+library(rpart)
+library(rpart.plot)
+library(GGally)
+library(gridExtra)
+library(magrittr) 
+```
+
+
+## 1.3 Diamonds Data Set
+
+```{r}
+diamonds
+```
+
+```{r}
+str(diamonds)
+```
+
+
+# 2. Correlation Analysis
+
+## 2.1 Price & Carat
+
+```{r}
+price_carat <- ggplot(aes(x=carat, y=price), data=diamonds) +
+  geom_point(fill=I("#f77a20"), color=I("black"), shape=21) +
+  stat_smooth(method="lm") +
+  scale_x_continuous(lim = c(0, quantile(diamonds$carat, 0.99)) ) +
+  scale_y_continuous(lim = c(0, quantile(diamonds$price, 0.99)) ) +
+  ggtitle("price vs. carat") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+## 2.2 Price & Depth
+
+```{r}
+price_depth <- ggplot(aes(x=depth, y=price), data=diamonds) +
+  geom_point(fill=I("#f77a20"), color=I("black"), shape=21) +
+  stat_smooth(method="lm") +
+  scale_x_continuous(lim = c(0, quantile(diamonds$depth, 0.99)) ) +
+  scale_y_continuous(lim = c(0, quantile(diamonds$price, 0.99)) ) +
+  ggtitle("price vs. depth") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.3 Price & Table
+
+```{r}
+price_table <- ggplot(aes(x=table, y=price), data=diamonds) +
+  geom_point(fill=I("#f77a20"), color=I("black"), shape=21) +
+  stat_smooth(method="lm") +
+  scale_x_continuous(lim = c(0, quantile(diamonds$table, 0.99)) ) +
+  scale_y_continuous(lim = c(0, quantile(diamonds$price, 0.99)) ) +
+  ggtitle("price vs. table") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.4 Price & X
+
+```{r}
+price_x <- ggplot(aes(x=x, y=price), data=diamonds) +
+  geom_point(fill=I("#f77a20"), color=I("black"), shape=21) +
+  stat_smooth(method="lm") +
+  scale_x_continuous(lim = c(0, quantile(diamonds$x, 0.99)) ) +
+  scale_y_continuous(lim = c(0, quantile(diamonds$price, 0.99)) ) +
+  ggtitle("price vs. x") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.5 Price & Y
+
+```{r}
+price_y <- ggplot(aes(x=y, y=price), data=diamonds) +
+  geom_point(fill=I("#f77a20"), color=I("black"), shape=21) +
+  stat_smooth(method="lm") +
+  scale_x_continuous(lim = c(0, quantile(diamonds$y, 0.99)) ) +
+  scale_y_continuous(lim = c(0, quantile(diamonds$price, 0.99)) ) +
+  ggtitle("price vs. y") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.6 Price & Z
+
+```{r}
+price_z <- ggplot(aes(x=z, y=price), data=diamonds) +
+  geom_point(fill=I("#f77a20"), color=I("black"), shape=21) +
+  stat_smooth(method="lm") +
+  scale_x_continuous(lim = c(0, quantile(diamonds$z, 0.99)) ) +
+  scale_y_continuous(lim = c(0, quantile(diamonds$price, 0.99)) ) +
+  ggtitle("price vs. z") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.7 Pairwise Scatter Plots
+
+```{r message=FALSE, warning=FALSE}
+grid.arrange(arrangeGrob(price_carat, 
+                         price_depth, price_table, 
+                         ncol=2, nrow=2, 
+                         layout_matrix=rbind(c(1,1), c(2,3))),
+             arrangeGrob(price_x, price_y, price_z, 
+                         ncol=1, nrow=3), ncol=2)
+```
+
+## 2.8 Correlation Plots and Coefficients
+
+```{r}
+ggpairs(diamonds[, c("price", "carat", "depth", "table", "x", "y", "z")], 
+        upper =list(continuous="cor"), title = "Correlations") + theme(plot.title = element_text(hjust = 0.5))
+```
+
+It is seen from the graphs that there is a very high correlation between price and carat & y variables. It is clear that the explanatory power of carat and y variables on the price will be high in the price prediction models to be established.
+
+
+# 3. Estimation Models
+
+## 3.1 Test and Train Sets
+
+Training and test sets were created, with 20% of the main data set being test and 80% being training set.
+
+```{r}
+set.seed(503)
+diamonds_test <- diamonds %>% mutate(diamond_id = row_number()) %>% 
+  group_by(cut, color, clarity) %>% sample_frac(0.2) %>% ungroup()
+
+diamonds_train <- anti_join(diamonds %>% mutate(diamond_id = row_number()), 
+                            diamonds_test, by = "diamond_id")
+```
+
+
+## 3.2 Model Building and Estimation
+
+### 3.2.1 Classification and Regression Trees (CART)
+
+#### 3.2.1.1 Anova Model
+
+```{r}
+model<- rpart(price~carat+y+x+z+cut+color+clarity, data=diamonds_train,  method="anova")
+rpart.plot(model, type=3, digits=3, fallen.leaves = TRUE)
+```
+
+```{r}
+pred<- predict(model, diamonds_test)
+head(pred)
+```
+
+```{r}
+Mae<- function(diamonds_test, pred) {mean(abs(diamonds_test - pred))}
+Mae(diamonds_test$price, pred) 
+```
+
+#### 3.2.1.2 Class Model
+
+```{r}
+model2<- rpart(price~carat+y+x+z+cut+color+clarity, data=diamonds_train,  method="class")
+```
+
+```{r}
+pred2<- predict(model2, diamonds_test, type="class")
+head(pred2)
+```
+
+```{r}
+pred_roc<- predict(model2, diamonds_test)
+
+Mae<- function(diamonds_test, pred_roc) {mean(abs(diamonds_test - pred_roc))}
+Mae(diamonds_test$price, pred_roc) 
+```
+
+
+### 3.2.2 Linear Regression
+
+```{r}
+linreg= lm(price~carat+y+x+z+cut+color+clarity, data= diamonds_train)
+summary(linreg)
+```
+
+```{r}
+linreg
+```
+
+```{r}
+pred_linreg<- predict(linreg, diamonds_test)
+head(pred_linreg)
+```
+
+```{r}
+Mae_linreg<- function(diamonds_test, pred_linreg) {mean(abs(diamonds_test - pred_linreg))}
+Mae_linreg(diamonds_test$price, pred_linreg)  
+```
+
+# 4. Comparison and Conclusion
+
+When CART and linear regression models are compared, it is seen that the model with the smallest mae value is the model established by linear regression. The fact that the R-squared and adjusted R-squared values(0.92) are quite high in the linear regression model shows that the variables in the model explain the changes in price at a high rate. Additionally, the fact that the p-value (2.2e-16) is significantly lower than 0.05 supports the significance of the model. Based on all these results, the most suitable model among these three models to estimate diamond prices is the linear regression model.

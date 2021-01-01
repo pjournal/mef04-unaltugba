@@ -1,4 +1,3 @@
-**You can see my progress journey**
 
 ## Assignment 1: 
   - [RMarkdown Report](Assignment_1.html)
@@ -9,7 +8,7 @@
 ## Assignment 2: 
   - [September 2020 Electricity Report](Electricity-Report.html)
   
- ## In Class Exercis:
+## In Class Exercis:
   - [IMDB Shiny App](https://tugbaunal.shinyapps.io/ShinyAppIMDB/)
 
 ## Assignment 3: 

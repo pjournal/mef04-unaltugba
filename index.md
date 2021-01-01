@@ -13,3 +13,6 @@
 
 ## Assignment 3: 
   - [Diamonds Price Estimation](DiamondsPriceEstimation.html)
+  
+## Group Project:
+  - [MadagaskaR Progress Journal](https://pjournal.github.io/mef04g-madagaskar/)

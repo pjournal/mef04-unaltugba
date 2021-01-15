@@ -14,5 +14,8 @@
 ## Assignment 3: 
   - [Diamonds Price Estimation](DiamondsPriceEstimation.html)
   
+## Term Final Project:
+  - [Final Project](BDA503-Final.pdf)
+  
 ## Group Project:
   - [MadagaskaR Progress Journal](https://pjournal.github.io/mef04g-madagaskar/)
